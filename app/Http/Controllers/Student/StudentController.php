@@ -3,12 +3,19 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Http\Model\StudentModel;
 use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
-    public function __construct()
+    /**
+     * @var StudentModel
+     */
+    protected $sM;
+
+    public function __construct(StudentModel $studentModel)
     {
+        $this->sM = $studentModel;
     }
 
     /**
@@ -81,6 +88,27 @@ class StudentController extends Controller
         $count3 = DB::table('student')->where('id', 2)
             ->decrement('age', 3, ['name' => '李冰冰']);
         dump($count3);
+    }
+
+    public function getStudents()
+    {
+        // all
+//        $students = $this->sM::all();
+//        dump($students);
+
+        // findOrFail
+//        $students = $this->sM::findOrFail(3);
+//        dump($students);
+
+        $where[] = ['id', '>', 1];
+        $where[] = ['age', '>', 10];
+
+        $student = $this->sM::where($where)
+            ->orderBy('age', 'desc')
+            ->first();
+
+//        dump($student->create_time);
+        dump($student->toArray());
     }
 
     /**

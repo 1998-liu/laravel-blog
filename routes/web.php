@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Foundation\Application;
 
 Route::get('/', function () {
@@ -48,6 +47,9 @@ Route::group(['prefix' => 'member'], function () {
 Route::any('student/studentList', ['uses' => 'Student\StudentController@getStudentList']);
 Route::any('student/addStudent', ['uses' => 'Student\StudentController@addStudent']);
 Route::any('student/updateStudent', ['uses' => 'Student\StudentController@updateStudent']);
+
+//Eloquent ORM
+Route::any('student/getStudents', ['uses' => 'Student\StudentController@getStudents']);
 
 Route::any('member/{id}', [
     'uses' => 'Member\MemberController@info',
