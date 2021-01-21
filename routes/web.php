@@ -1,15 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 use Illuminate\Foundation\Application;
 
@@ -18,7 +8,7 @@ Route::get('/', function () {
 });
 
 //基本路由
-Route::get('laravel-version', function(){
+Route::get('laravel-version', function () {
     $laravel = new Application();
     dump('Your Laravel version is ' . $laravel::VERSION);
 });
@@ -35,7 +25,6 @@ Route::get('user/{id}/{name?}', function ($id, $name = 'Jame') {
 
 //路由群组
 Route::group(['prefix' => 'member'], function () {
-
     Route::get('master/member-center', ['as' => 'center', function () {
         return route('center');
     }]);
@@ -55,6 +44,11 @@ Route::group(['prefix' => 'member'], function () {
 //    'as'   => 'memberInfo',
 //]);
 
+//查询构造器
+Route::any('student/studentList', ['uses' => 'Student\StudentController@getStudentList']);
+Route::any('student/addStudent', ['uses' => 'Student\StudentController@addStudent']);
+Route::any('student/updateStudent', ['uses' => 'Student\StudentController@updateStudent']);
+
 Route::any('member/{id}', [
-    'uses' => 'Member\MemberController@info'
+    'uses' => 'Member\MemberController@info',
 ])->where(['id' => '[0-9]+']);

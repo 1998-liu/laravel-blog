@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Http\Controllers\Member;
+namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 
